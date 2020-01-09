@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="circles" targetName="circles" />
+    </generated>
+  </component>
+  <component name="CMakeSettings" AUTO_RELOAD="true">
+    <configurations>
+      <configuration PROFILE_NAME="Release" CONFIG_NAME="Release" TOOLCHAIN_NAME="Visual Studio" />
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" TOOLCHAIN_NAME="Visual Studio" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c38e6dee-a617-41c8-b38c-ac33170e8ecb" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="ProjectId" id="1UqlxkyYinHdBkhor0iSHIUbaer" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="D:/opencv/build/OpenCVConfig.cmake" />
+    <property name="settings.editor.selected.configurable" value="CPPToolchains" />
+  </component>
+  <component name="RunManager">
+    <configuration name="circles" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="circles" TARGET_NAME="circles" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="circles" RUN_TARGET_NAME="circles">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c38e6dee-a617-41c8-b38c-ac33170e8ecb" name="Default Changelist" comment="" />
+      <created>1576092254595</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1576092254595</updated>
+      <workItem from="1576092256512" duration="6642000" />
+      <workItem from="1576111118530" duration="1807000" />
+      <workItem from="1576122132989" duration="1861000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="294" y="164" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1576123349468">
+      <screen x="0" y="0" width="1680" height="1020" />
+    </state>
+    <state x="294" y="164" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1680.1020@0.0.1680.1020" timestamp="1576123349468" />
+    <state x="620" y="264" key="FileChooserDialogImpl" timestamp="1576123718115">
+      <screen x="0" y="0" width="1680" height="1020" />
+    </state>
+    <state x="620" y="264" key="FileChooserDialogImpl/0.0.1680.1020@0.0.1680.1020" timestamp="1576123718115" />
+    <state width="1636" height="270" key="GridCell.Tab.0.bottom" timestamp="1576123994399">
+      <screen x="0" y="0" width="1680" height="1020" />
+    </state>
+    <state width="1636" height="270" key="GridCell.Tab.0.bottom/0.0.1680.1020@0.0.1680.1020" timestamp="1576123994399" />
+    <state width="1636" height="270" key="GridCell.Tab.0.center" timestamp="1576123994399">
+      <screen x="0" y="0" width="1680" height="1020" />
+    </state>
+    <state width="1636" height="270" key="GridCell.Tab.0.center/0.0.1680.1020@0.0.1680.1020" timestamp="1576123994399" />
+    <state width="1636" height="270" key="GridCell.Tab.0.left" timestamp="1576123994398">
+      <screen x="0" y="0" width="1680" height="1020" />
+    </state>
+    <state width="1636" height="270" key="GridCell.Tab.0.left/0.0.1680.1020@0.0.1680.1020" timestamp="1576123994398" />
+    <state width="1636" height="270" key="GridCell.Tab.0.right" timestamp="1576123994399">
+      <screen x="0" y="0" width="1680" height="1020" />
+    </state>
+    <state width="1636" height="270" key="GridCell.Tab.0.right/0.0.1680.1020@0.0.1680.1020" timestamp="1576123994399" />
+    <state x="341" y="141" key="SettingsEditor" timestamp="1576123425833">
+      <screen x="0" y="0" width="1680" height="1020" />
+    </state>
+    <state x="341" y="141" key="SettingsEditor/0.0.1680.1020@0.0.1680.1020" timestamp="1576123425833" />
+    <state x="481" y="338" key="com.intellij.ide.util.TipDialog" timestamp="1576122134807">
+      <screen x="0" y="0" width="1680" height="1020" />
+    </state>
+    <state x="481" y="338" key="com.intellij.ide.util.TipDialog/0.0.1680.1020@0.0.1680.1020" timestamp="1576122134807" />
+    <state x="531" y="366" key="com.intellij.ide.util.TipDialog/70.27.1610.1023@70.27.1610.1023" timestamp="1576092259094" />
+    <state x="496" y="230" key="run.anything.popup" timestamp="1576123505658">
+      <screen x="0" y="0" width="1680" height="1020" />
+    </state>
+    <state x="496" y="230" key="run.anything.popup/0.0.1680.1020@0.0.1680.1020" timestamp="1576123505658" />
+    <state x="538" y="261" width="672" height="678" key="search.everywhere.popup" timestamp="1576092717052">
+      <screen x="70" y="27" width="1610" height="1023" />
+    </state>
+    <state x="538" y="261" width="672" height="678" key="search.everywhere.popup/70.27.1610.1023@70.27.1610.1023" timestamp="1576092717052" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/main.cpp</url>
+          <line>13</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
