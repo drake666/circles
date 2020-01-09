@@ -70,14 +70,14 @@ struct peakRLess : public std::binary_function<PeakR, PeakR, bool>
 
 
 std::vector<Circle> CircleAccumulator::findArgmax(int pMaxNbPos, int pMaxPeak, float pMinDistance,
-                                                  float pThreshold, int pAbsThreshold, int pNormalize)
+                                                  float pThreshold, int pAbsThreshold, Normalization pNormalize)
 {
     std::vector<Circle> lDetections = {};
     std::vector<int> lLevelTotal(mLevels.size(), 0);
     std::vector<std::vector<Peak>> lLevelPeaks(mLevels.size());
 	std::priority_queue<PeakR, std::vector<PeakR>, peakRLess> lGreedyPeaks;
 
-    if (pNormalize == 0)
+    if (pNormalize == Normalization::LevelWise)
     {
         // Level-wise normalization
 		for (auto k = 0; k < mRadii.size(); k++)
@@ -91,7 +91,7 @@ std::vector<Circle> CircleAccumulator::findArgmax(int pMaxNbPos, int pMaxPeak, f
             }
         }
     }
-    else if (pNormalize == 1)
+    else if (pNormalize == Normalization::CircleCircumference)
     {
         // Circle circumference
         for (auto k = 0; k < mRadii.size(); k++)
@@ -116,13 +116,12 @@ std::vector<Circle> CircleAccumulator::findArgmax(int pMaxNbPos, int pMaxPeak, f
 			for (auto k = 0; k < mRadii.size(); k++)
             {
                 const auto& lVal = mLevels[k].at<std::uint16_t>(j, i);
-                if (lVal > pAbsThreshold)
+				auto lNormalizeValue = static_cast<float>(lVal) / static_cast<float>(lLevelTotal[k]);
+                if (lVal > pAbsThreshold && lNormalizeValue > pThreshold)
                 {
                     // x, y, v
-                    lLevelPeaks[k].push_back({static_cast<float>(i) * mXYStep, static_cast<float>(j) * mXYStep,
-										      static_cast<float>(lVal) / static_cast<float>(lLevelTotal[k])});
-					lGreedyPeaks.push({ static_cast<float>(i) * mXYStep, static_cast<float>(j) * mXYStep,
-										static_cast<float>(lVal) / static_cast<float>(lLevelTotal[k]), mRadii[k] });
+                    lLevelPeaks[k].push_back({static_cast<float>(i) * mXYStep, static_cast<float>(j) * mXYStep, lNormalizeValue});
+					lGreedyPeaks.push({static_cast<float>(i) * mXYStep, static_cast<float>(j) * mXYStep, lNormalizeValue, mRadii[k]});
                 }
             }
         }
