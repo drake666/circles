@@ -38,11 +38,11 @@ int main() {
 	{
 		lRadii[i] = lStart + i * 1.0f;
 	}
-    CircleAccumulator lAcc(lSubEdges.cols, lSubEdges.rows, lRadii, 2.0, 10.0);
+    CircleAccumulator lAcc(lSubEdges.cols, lSubEdges.rows, lRadii, 3.0, 20.0);
     lAcc.accumulate(lSubEdges);
 
 	cv::cvtColor(lImg, lImg, cv::COLOR_HSV2BGR);
-    auto lCircles = lAcc.findArgmax(5, 4, 1, 0.0, 30, CircleAccumulator::Normalization::LevelWise);
+    auto lCircles = lAcc.findArgmax(5, 4, 1, 0.0, 15, CircleAccumulator::Normalization::LevelWise);
 	auto i = 0;
 	cv::Mat lImgDraw;
 	lImg.copyTo(lImgDraw);

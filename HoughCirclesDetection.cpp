@@ -82,13 +82,7 @@ std::vector<Circle> CircleAccumulator::findArgmax(int pMaxNbPos, int pMaxPeak, f
         // Level-wise normalization
 		for (auto k = 0; k < mRadii.size(); k++)
         {
-            for (auto i = 0; i < mLevels[0].cols; i++)
-            {
-                for (auto j = 0; j < mLevels[0].rows; j++)
-                {
-                    lLevelTotal[k] += mLevels[k].at<std::uint16_t>(j, i);
-                }
-            }
+            lLevelTotal[k] = cv::sum(mLevels[k])[0];
         }
     }
     else if (pNormalize == Normalization::CircleCircumference)
