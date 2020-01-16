@@ -6,7 +6,7 @@
 #include <opencv2/highgui.hpp>
 
 int main() {
-    auto lImg = cv::imread("eye2.jpg");
+    auto lImg = cv::imread("eye10.jpg");
     cv::resize(lImg, lImg, cv::Size(), 2.0, 2.0);
 	cv::cvtColor(lImg, lImg, cv::COLOR_BGR2HSV);
 	std::vector<cv::Mat> lChannels;
@@ -15,8 +15,10 @@ int main() {
 	cv::medianBlur(lIntensity, lIntensity, 5);
 
 	double lMinVal;
-	cv::minMaxLoc(lIntensity, &lMinVal);
-	lMinVal += 30.0;
+	int lWidth = lIntensity.cols;
+	int lHeight = lIntensity.rows;
+	cv::minMaxLoc(lIntensity.colRange(lWidth*0.35, lWidth*0.65).rowRange(lHeight * 0.35, lHeight*0.65), &lMinVal);
+	lMinVal += 50.0;
 	
 	cv::Mat lMask;
 	auto lKernel = cv::getStructuringElement(cv::MORPH_ELLIPSE, { 5, 5 });
@@ -33,7 +35,7 @@ int main() {
 	cv::imshow("SubEdge", lSubEdges);
 
 	std::vector<float> lRadii(20);
-	auto lStart = 4.0f;
+	auto lStart = 8.0f;
 	for (auto i = 0; i < lRadii.size(); i++)
 	{
 		lRadii[i] = lStart + i * 1.0f;
