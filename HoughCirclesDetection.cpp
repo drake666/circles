@@ -121,7 +121,7 @@ std::vector<Circle> CircleAccumulator::findArgmax(int pMaxNbPos, int pMaxPeak, f
         }
     }
 
-	// What I should do:
+    // What I should do:
     // 1. Merge peak XY-wise (hierachical clustering style)
     // 2. Merge peak radii (same way)
     // 3. Keep pMaxNbPos; keep only location that the best level is superior to the threshold
