@@ -61,11 +61,11 @@ struct peakLess : public std::binary_function<Peak, Peak, bool>
 
 struct peakRLess : public std::binary_function<PeakR, PeakR, bool>
 {
-	bool
-		operator()(const PeakR& __x, const PeakR& __y) const
-	{
-		return __x[2] < __y[2];
-	}
+    bool
+        operator()(const PeakR& __x, const PeakR& __y) const
+    {
+        return __x[2] < __y[2];
+    }
 };
 
 
@@ -75,12 +75,12 @@ std::vector<Circle> CircleAccumulator::findArgmax(int pMaxNbPos, int pMaxPeak, f
     std::vector<Circle> lDetections = {};
     std::vector<int> lLevelTotal(mLevels.size(), 0);
     std::vector<std::vector<Peak>> lLevelPeaks(mLevels.size());
-	std::priority_queue<PeakR, std::vector<PeakR>, peakRLess> lGreedyPeaks;
+    std::priority_queue<PeakR, std::vector<PeakR>, peakRLess> lGreedyPeaks;
 
     if (pNormalize == Normalization::LevelWise)
     {
         // Level-wise normalization
-		for (auto k = 0; k < mRadii.size(); k++)
+        for (auto k = 0; k < mRadii.size(); k++)
         {
             lLevelTotal[k] = cv::sum(mLevels[k])[0];
         }
@@ -96,7 +96,7 @@ std::vector<Circle> CircleAccumulator::findArgmax(int pMaxNbPos, int pMaxPeak, f
     else
     {
         // No normalization
-		for (auto k = 0; k < mRadii.size(); k++)
+        for (auto k = 0; k < mRadii.size(); k++)
         {
             lLevelTotal[k] = 1;
         }
@@ -107,75 +107,73 @@ std::vector<Circle> CircleAccumulator::findArgmax(int pMaxNbPos, int pMaxPeak, f
     {
         for (auto j = 0; j < mLevels[0].rows; j++)
         {
-			for (auto k = 0; k < mRadii.size(); k++)
+            for (auto k = 0; k < mRadii.size(); k++)
             {
                 const auto& lVal = mLevels[k].at<std::uint16_t>(j, i);
-				auto lNormalizeValue = static_cast<float>(lVal) / static_cast<float>(lLevelTotal[k]);
+                auto lNormalizeValue = static_cast<float>(lVal) / static_cast<float>(lLevelTotal[k]);
                 if (lVal > pAbsThreshold && lNormalizeValue > pThreshold)
                 {
                     // x, y, v
                     lLevelPeaks[k].push_back({static_cast<float>(i) * mXYStep, static_cast<float>(j) * mXYStep, lNormalizeValue});
-					lGreedyPeaks.push({static_cast<float>(i) * mXYStep, static_cast<float>(j) * mXYStep, lNormalizeValue, mRadii[k]});
+                    lGreedyPeaks.push({static_cast<float>(i) * mXYStep, static_cast<float>(j) * mXYStep, lNormalizeValue, mRadii[k]});
                 }
             }
         }
     }
 
-	// Merge peak XY-wise (hierachical clustering style)
+	// What I should do:
+    // 1. Merge peak XY-wise (hierachical clustering style)
+    // 2. Merge peak radii (same way)
+    // 3. Keep pMaxNbPos; keep only location that the best level is superior to the threshold
+    // 4. In those location, keep pMaxPeak per Pos; keep only peaks which are supérior to the threshold
 
-	// Merge peak radii (same way)
+    // Instead: let's do it REALLY greedy
+    auto lSqMinDistance = pMinDistance * pMinDistance;
+    while (!lGreedyPeaks.empty() && lDetections.size() != pMaxNbPos)
+    {
+        auto lPeak = lGreedyPeaks.top();
+        lGreedyPeaks.pop();
 
-	// Keep pMaxNbPos; keep only location that the best level is superior to the threshold
-	
-	// In those location, keep pMaxPeak per Pos; keep only peaks which are supérior to the threshold
-
-	// let's do it REALLY greedy
-	auto lSqMinDistance = pMinDistance * pMinDistance;
-	while (!lGreedyPeaks.empty() && lDetections.size() != pMaxNbPos)
-	{
-		auto lPeak = lGreedyPeaks.top();
-		lGreedyPeaks.pop();
-
-		auto lToAdd = true;
-		auto lIdx = -1;
-		auto lMinDist = 1e10f;
-		for (auto i = 0; i < lDetections.size(); i++)
-		{
-			const auto& lDetection = lDetections[i];
-			auto lDist = std::pow(lDetection[0] - lPeak[0], 2) + std::pow(lDetection[1] - lPeak[1], 2);
-			if (std::pow(lDetection[0] - lPeak[0], 2) + std::pow(lDetection[1] - lPeak[1], 2) < lSqMinDistance && lMinDist > lDist)
-			{
-				lToAdd = false;
-				break;
-			}
-		}
-		if (lToAdd)
-		{
-			lDetections.push_back({ lPeak[0], lPeak[1], lPeak[3] });
-		}
-	}
+        auto lToAdd = true;
+        auto lIdx = -1;
+        auto lMinDist = 1e10f;
+        for (auto i = 0; i < lDetections.size(); i++)
+        {
+            const auto& lDetection = lDetections[i];
+            auto lDist = std::pow(lDetection[0] - lPeak[0], 2) + std::pow(lDetection[1] - lPeak[1], 2);
+            if (std::pow(lDetection[0] - lPeak[0], 2) + std::pow(lDetection[1] - lPeak[1], 2) < lSqMinDistance && lMinDist > lDist)
+            {
+                lToAdd = false;
+                break;
+            }
+        }
+        if (lToAdd)
+        {
+            lDetections.push_back({ lPeak[0], lPeak[1], lPeak[3] });
+        }
+    }
 
     return lDetections;
 }
 
 const cv::Mat CircleAccumulator::getLevel(int pLevel) const
 {
-	if (pLevel < 0 || pLevel >= mLevels.size())
-	{
-		std::cout << "WARNING: ask to show accumulator level " << pLevel << " which does not exist (" << mLevels.size() << ")" << std::endl;
-		return cv::Mat();
-	}
-	return mLevels[pLevel];
+    if (pLevel < 0 || pLevel >= mLevels.size())
+    {
+        std::cout << "WARNING: ask to show accumulator level " << pLevel << " which does not exist (" << mLevels.size() << ")" << std::endl;
+        return cv::Mat();
+    }
+    return mLevels[pLevel];
 }
 
 
 const float CircleAccumulator::getRadius(int pLevel) const
 {
-	return mRadii[pLevel];
+    return mRadii[pLevel];
 }
 
 
 const int CircleAccumulator::getNLevels() const
 {
-	return mLevels.size();
+    return mLevels.size();
 }

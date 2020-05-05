@@ -13,12 +13,12 @@ using PeakR = std::array<float, 4>;    /// x, y, v, r
 class CircleAccumulator
 {
 public:
-	enum class Normalization
-	{
-		NoNormalization = -1,
-		LevelWise,
-		CircleCircumference
-	};
+    enum class Normalization
+    {
+        NoNormalization = -1,
+        LevelWise,
+        CircleCircumference
+    };
 
     CircleAccumulator(int pWidth, int pHeight, std::vector<float> pRadii, float pXYStep=1.0, float pThetaStep=1.0);
 
@@ -29,10 +29,10 @@ public:
     std::vector<Circle> findArgmax(int pMaxNbPos=1, int pMaxPeak=1, float pMinDistance=1.0, float pThreshold=1.0,
                                    int pAbsThreshold=0, Normalization pNormalize = Normalization::LevelWise);
 
-	const cv::Mat getLevel(int pLevel) const;
+    const cv::Mat getLevel(int pLevel) const;
 
-	const int getNLevels() const;
-	const float getRadius(int pLevel) const;
+    const int getNLevels() const;
+    const float getRadius(int pLevel) const;
 
 private:
     std::vector<cv::Mat> mLevels;
